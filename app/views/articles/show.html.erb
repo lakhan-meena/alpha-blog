@@ -1,13 +1,32 @@
 <h2 align="center"><%= @article.title %> </h2>
 <div class="well col-xs-10 col-xs-offset-1 ">
+	<ul class="listing">
+		<div class="row center">
+			<div class=" col-md-6 col-md-offset-3">
+				<li>
+					<%= link_to gravatar_for(@article.user), user_path(@article.user) %>
+				</li>
+				<li class="article-title">
+					<%= link_to @article.user.full_name, user_path(@article.user) %>
+				</li>
+				<li>
+					<small>
+						<%= pluralize(@article.user.articles.count, "article") if @article.user.articles %>
+					</small>
+				</li>
+			</div>
+		</div>
+	</ul>
 	<h4 class="center description"><strong>Description</strong></h4>
 	<hr>
 	<%= simple_format(@article.description) %>
-	<div class="article-actions">
-		<%= link_to 'Back', articles_path, class: "btn btn-primary" %>	
-		<%= link_to 'Edit', edit_article_path(@article), class: "btn btn-success" %>
-		<%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: "Are you sure"}, class: "btn btn-danger" %>
-	</div>	
+	<% if logged_in? && current_user == @article.user %>
+		<div class="article-actions">
+			<%= link_to 'Back', articles_path, class: "btn btn-primary" %>	
+			<%= link_to 'Edit', edit_article_path(@article), class: "btn btn-success" %>
+			<%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: "Are you sure"}, class: "btn btn-danger" %>
+		</div>
+	<% end %>
 </div>
 
 
