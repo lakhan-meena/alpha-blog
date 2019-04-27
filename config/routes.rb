@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 	root 'home#index'
 	resources :articles
+	resources :categories, except: [:destroy]
 	resources :users, except: [:new]
 	get '/sign_up', to: 'users#new'
 	get '/sign_in', to: 'sessions#new'
