@@ -1,0 +1,8 @@
+<h1 align="center"><%= "Category: " + @category.name %></h1>
+<div align="center">
+	<div class="row">
+		<span class="badge"><%= link_to "Edit", edit_category_path(@category) %></span>
+	</div>
+</div>
+
+<%= render 'shared/articles', obj: @category_articles %>
